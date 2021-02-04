@@ -40,12 +40,12 @@ class PropertyRanker(object):
                     yield chunk.loc[mask]
                     break
 
-        labels = pd.concat(gen_df_properties('data/labels.en.tsv.gz'))
+        labels = pd.concat(gen_df_properties('data/labels-p.en.tsv.gz'))
         labels['node2'] = labels['node2'].apply(lambda x: x[1:-4])
         labels.columns = ['pnode', 'label']
         labels = labels.groupby('pnode')['label'].apply(list).reset_index().set_index('pnode')
 
-        aliases = pd.concat(gen_df_properties('data/aliases.en.tsv.gz'))
+        aliases = pd.concat(gen_df_properties('data/aliases-p.en.tsv.gz'))
         aliases['node2'] = aliases['node2'].apply(lambda x: x[1:-4])
         aliases.columns = ['pnode', 'alias']
         aliases = aliases.groupby('pnode')['alias'].apply(list).reset_index().set_index('pnode')
